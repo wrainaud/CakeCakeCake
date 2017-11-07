@@ -1,32 +1,31 @@
-// *********************************************************************************
-// CONNECTION.JS - THIS FILE INITIATES THE CONNECTION TO MYSQL
-// *********************************************************************************
-
 var mysql = require("mysql");
 
-// we placed the connections in this source object
 var source = {
   // localhost
   localhost: {
-    port: 3306,
-    host: "localhost",
+    port: 8889,
+    host: "127.0.0.1",
     user: "root",
-    password: "",
-    database: "todolist"
+    password: "root",
+    database: "cakeList"
   },
 
   // jawsDB
   jawsDB: {
     port: 3306,
-    host: "<host name>",
-    user: "<name of user>",
-    password: "<password>",
-    database: "<name of database>"
+    host: "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    user: "o5ikum4fe961ryv4",
+    password: "buifi9lbf1mbiyo4",
+    database: "cakeList"
   }
 };
 
-// we use source.[name of connection] to hook into mysql
-var connection = mysql.createConnection(source.localhost);
+// Hook into JAWS DB or default to localhost
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(source.jawsDB);
+} else {
+  connection = mysql.createConnection(source.localhost);
+}
 
 connection.connect(function(err) {
   if (err) {

@@ -1,5 +1,5 @@
 {
-  "name": "orm-to-sequelize",
+  "name": "CakeCakeCake",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Created by William Rainaud - email: wrainaud@outlook.com - web: http://wrainaud.com",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
