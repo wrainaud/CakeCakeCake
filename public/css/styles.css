@@ -1,3 +1,20 @@
+ @import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+ html {
+   position: relative;
+   min-height: 100%;
+ }
+
+ body {
+   font-family: 'Alfa Slab One', cursive;
+  background-image: url("http://vegasseven.com/files/2017/02/milkbar_by_krystal_ramirez_1_WEB.jpg?x52918");
+  background-size: 100%;
+
+ }
+
+ code {
+   font-size: 80%;
+ }
+
 .cake-list {
   margin-top: 75px;
 }

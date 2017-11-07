@@ -4,20 +4,20 @@ $(document).ready(function() {
   // Our new todos will go inside the todoContainer
   var $cakeContainer = $(".cake-container");
   // Adding event listeners for deleting, editing, and adding todos
-  $(document).on("click", "button.delete", deleteTodo);
+  $(document).on("click", "button.delete", deleteCake);
   $(document).on("click", "button.complete", toggleComplete);
-  $(document).on("click", ".cake-item", editTodo);
+  $(document).on("click", ".cake-item", editCake);
   $(document).on("keyup", ".cake-item", finishEdit);
   $(document).on("blur", ".cake-item", cancelEdit);
-  $(document).on("submit", "#cake-form", insertTodo);
+  $(document).on("submit", "#cake-form", insertCake);
 
   // Our initial todos array
   var cakes = [];
 
-  // Getting todos from database when page loads
+  // Getting cakes from database when page loads
   getCakes();
 
-  // This function resets the todos displayed with new todos from the database
+  // This function resets the cakes displayed with new cakes from the database
   function initializeRows() {
     $cakeContainer.empty();
     var rowsToAdd = [];
@@ -27,7 +27,7 @@ $(document).ready(function() {
     $cakeContainer.prepend(rowsToAdd);
   }
 
-  // This function grabs todos from the database and updates the view
+  // This function grabs cakes from the database and updates the view
   function getCakes() {
     $.get("/api/cakes", function(data) {
       cakes = data;
@@ -45,7 +45,7 @@ $(document).ready(function() {
     }).done(getCakes);
   }
 
-  // This function handles showing the input box for a user to edit a todo
+  // This function handles showing the input box for a user to edit a cake
   function editCake() {
     var currentCake = $(this).data("cake");
     $(this).children().hide();
@@ -62,7 +62,7 @@ $(document).ready(function() {
     updateCake(cake);
   }
 
-  // This function starts updating a todo in the database if a user hits the "Enter Key"
+  // This function starts updating a cake in the database if a user hits the "Enter Key"
   // While in edit mode
   function finishEdit() {
     var updatedCake = $(this).data("cake");
@@ -82,7 +82,7 @@ $(document).ready(function() {
     }).done(getCakes);
   }
 
-  // This function is called whenever a todo item is in edit mode and loses focus
+  // This function is called whenever a cake item is in edit mode and loses focus
   // This cancels any edits being made
   function cancelEdit() {
     var currentCake = $(this).data("cake");
@@ -118,7 +118,7 @@ $(document).ready(function() {
     return $newInputRow;
   }
 
-  // This function inserts a new todo into our database and then updates the view
+  // This function inserts a new cake into our database and then updates the view
   function insertCake(event) {
     event.preventDefault();
     var cake = {
