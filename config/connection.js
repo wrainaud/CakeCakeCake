@@ -16,7 +16,7 @@ var source = {
         host: "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
         user: "o5ikum4fe961ryv4",
         password: "buifi9lbf1mbiyo4",
-        database: "cakeList"
+        database: "w3ug1w98ywwtxek5"
     }
 };
 
