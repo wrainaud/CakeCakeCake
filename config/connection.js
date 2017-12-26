@@ -22,7 +22,7 @@ var source = {
 
 // Hook into JAWS DB or default to localhost
 if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(source.localhost);
+    connection = mysql.createConnection(source.jawsDB);
     // connection = mysql.createConnection(source.jawsDB);
 } else {
     connection = mysql.createConnection(source.localhost);
