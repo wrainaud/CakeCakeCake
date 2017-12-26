@@ -1,0 +1,92 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			    aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="./">CakeCakeCake</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="./cakes">API</a>
+				</li>
+				<li>
+					<a href="https://github.com/wrainaud/CAKECAKECAKE">Github</a>
+				</li>
+				<li>
+					<a href="http://wrainaud.com/">Portfolio</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container cake-loader">
+	<div class="row">
+		<div class="col-xs-12 text-center enter_section">
+			<form method="POST" action="/cakes/create">
+				<input type="text" class="form-control" name="cake_name" value="" id="enter_text" placeholder="Add Another Cake Here Brah">
+				<button type="submit" class="btn btn-primary" id="text-enter-button">Bake It!</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container cake-list">
+	<div class="col-xs-6 text-center" class="task">
+		<div class="row">
+			{{#each cake_data}} {{#unless this.devoured}}
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="{{this.id}} . {{this.cake_name}}" readonly>
+				<span class="input-group-btn">
+					<form method="POST" action="/cakes/update?_method=PUT" class="button-size">
+						<input type="hidden" type="text" name="cake_id" value={{this.id}}>
+						<button type="submit" class="btn btn-success">Eat it!</button>
+					</form>
+				</span>
+			</div>
+			{{/unless}} {{/each}}
+		</div>
+	</div>
+	<div class="col-xs-6 text-center" class="task">
+		{{#each cake_data}} {{#if this.devoured}}
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="{{this.id}} . {{this.cake_name}}" readonly>
+				<span class="input-group-btn">
+					<form method="POST" action="/cakes/update?_method=DELETE" class="button-size">
+						<input type="hidden" type="text" name="cake_id" value={{this.id}}>
+						<button type="submit" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button> 
+					</form>
+				</span>
+			</div>
+		{{/if}} {{/each}}		
+	</div>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+	<div class="container">
+		<a class="navbar-brand" href="http://wrainaud.com/">
+			<i class="fa fa-copyright fa-lg"></i> William Rainaud
+		</a>
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="./cakes">
+					<i class="fa fa-asterisk" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="https://github.com/wrainaud/CAKECAKECAKE">
+					<i class="fa fa-github" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="http://wrainaud.com/">
+					<i class="fa fa-id-card" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>

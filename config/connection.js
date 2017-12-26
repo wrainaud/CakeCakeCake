@@ -3,7 +3,7 @@ var mysql = require("mysql");
 var source = {
   // localhost
   localhost: {
-    port: 8889,
+    port: 3306,
     host: "127.0.0.1",
     user: "root",
     password: "root",
@@ -11,18 +11,19 @@ var source = {
   },
 
   // jawsDB
-  jawsDB: {
-    port: 3306,
-    host: "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    user: "o5ikum4fe961ryv4",
-    password: "buifi9lbf1mbiyo4",
-    database: "cakeList"
-  }
+  // jawsDB: {
+  //   port: 3306,
+  //   host: "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  //   user: "o5ikum4fe961ryv4",
+  //   password: "buifi9lbf1mbiyo4",
+  //   database: "cakeList"
+  // }
 };
 
 // Hook into JAWS DB or default to localhost
 if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(source.jawsDB);
+  connection = mysql.createConnection(source.localhost);
+  // connection = mysql.createConnection(source.jawsDB);
 } else {
   connection = mysql.createConnection(source.localhost);
 }

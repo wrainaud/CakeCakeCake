@@ -1,54 +1,86 @@
 var connection = require("./connection.js");
 
-var tableName = "cakes";
+function printQuestionMarks(num) {
+    var arr = [];
+
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+
+    return arr.toString();
+}
+
+function objToSql(ob) {
+    var arr = [];
+
+    for (var key in ob) {
+        arr.push(key + "=" + ob[key]);
+    }
+
+    return arr.toString();
+}
 
 var orm = {
+    all: function(tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
 
-  getCakes: function(callback) {
-    var s = "SELECT * FROM " + tableName;
+    create: function(table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table;
 
-    connection.query(s, function(err, result) {
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
 
-      callback(result);
+        console.log(queryString);
 
-    });
-  },
+        connection.query(queryString, vals, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
 
-  deleteCake: function(id, callback) {
+    update: function(table, objColVals, condition, cb) {
+        var queryString = "UPDATE " + table;
 
-    var s = "DELETE FROM " + tableName + " WHERE id=?";
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE ";
+        queryString += condition;
 
-    connection.query(s, [id], function(err, result) {
+        console.log(queryString);
+        connection.query(queryString, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
 
-      callback(result);
-    });
+    delete: function(table, condition, cb) {
+        var queryString = "DELETE FROM " + table;
+        queryString += " WHERE ";
+        queryString += condition;
 
-  },
-
-  addCake: function(cake, callback) {
-    var s = "INSERT INTO " + tableName + " (text, complete) VALUES (?,?)";
-    cake.complete = cake.complete || 0;
-    connection.query(s, [
-      cake.text, cake.complete
-    ], function(err, result) {
-
-      callback(result);
-
-    });
-  },
-
-  editCake: function(cake, callback) {
-    var s = "UPDATE " + tableName + " SET text=? WHERE id=?";
-
-    connection.query(s, [
-      cake.text, cake.id
-    ], function(err, result) {
-
-      callback(result);
-
-    });
-  }
-
+        console.log(queryString);
+        connection.query(queryString, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    }
 };
 
 module.exports = orm;
